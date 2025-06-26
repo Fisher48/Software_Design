@@ -30,7 +30,7 @@ class AverageCalculatorTest {
 
     // Повторяющийся тест со случайными значениями
     @RepeatedTest(1000)
-    void simpleTest() {
+    void randomValuesRepeatedTest() {
         AverageCalculator averageCalculator = new AverageCalculator();
         createRandomArray();
         int[] arrayWithRandomNums = createRandomArray();

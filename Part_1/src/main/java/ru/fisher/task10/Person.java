@@ -19,23 +19,25 @@ public final class Person {
             throw new IllegalArgumentException("Список книг не может содержать null");
         }
         this.name = name;
-        this.books = books;
+        this.books = List.copyOf(books);
     }
 
     public Person takeBook(Book book) {
         if (book == null) {
             throw new IllegalArgumentException("Книга не может быть пустой");
         }
-        this.books.add(book);
-        return new Person(this.name, this.books);
+        List<Book> updatedBooks = new ArrayList<>(books);
+        updatedBooks.add(book);
+        return new Person(this.name, updatedBooks);
     }
 
     public Person returnBook(Book book) {
         if (book == null) {
             throw new IllegalArgumentException("Книга не может быть пустой");
         }
-        books.remove(book);
-        return new Person(this.name, this.books);
+        List<Book> updatedBooks = new ArrayList<>(books);
+        updatedBooks.remove(book);
+        return new Person(this.name, updatedBooks);
     }
 
     @Override
@@ -105,24 +107,27 @@ final class Book {
     }
 
     public static void main(String[] args) {
-        Book book = new Book("SQL База","Алан Бьюли", 500);
-        Book book2 = new Book("Основы программирования на Java","Герберт Шилдт", 1900);
-        Book book3 = new Book("Spring быстро","Лауренциу Спилкэ", 450);
-        Person person = new Person("Читатель", new ArrayList<>());
-        person.takeBook(book);
-        person.takeBook(book2);
-        person.takeBook(book3);
-        System.out.println(person);
-        person.returnBook(book);
+        Book b1 = new Book("SQL База", "Алан Бьюли", 500);
+        Book b2 = new Book("Java", "Г. Шилдт", 1000);
+        Book b3 = new Book("Spring", "Л. Спилкэ", 450);
 
-        Book book4 = new Book("Объектно-ориентированное мышление","Мэтт Вайсфельд", 450);
-        Person person2 = new Person("Иван", Collections.singletonList(book4));
-        person.returnBook(book4);
-        System.out.println(person);
+        Person reader = new Person("Читатель", new ArrayList<>());
 
-        System.out.println(person2);
+        reader = reader.takeBook(b1);
+        reader = reader.takeBook(b2);
+        reader = reader.takeBook(b3);
+
+        System.out.println("После взятия книг: " + reader);
+
+        reader = reader.returnBook(b1);
+
+        System.out.println("После возврата одной книги: " + reader);
 
         // Будет ошибка
-        Book book5 = new Book("","", 1);
+        try {
+            new Book("","", 1);
+        } catch (Exception e) {
+            System.err.println("Ошибка: " + e.getMessage());
+        }
     }
 }

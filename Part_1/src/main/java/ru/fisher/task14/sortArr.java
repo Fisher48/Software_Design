@@ -24,15 +24,13 @@ import java.util.Arrays;
  *    Если arr[j] > pivot:
  *      просто увеличиваем j++ ⇒ область > pivot расширяется
  *
- *   Завершение (после цикла):
+ * 3. Завершение (после цикла):
+ *      Массив отсортирован, все элементы в порядке возрастания,
  *      j == high => все элементы обработаны.
  *      [low..i]: все < pivot
  *      [i+1..high-1]: все ≥ pivot
  *      Делаем swap(arr, i+1, high) и arr[i+1] становится pivot
- *      Результат: [low..i] ≤ pivot < [i+2..high]
- *
- * 3. Завершение:
- *      Массив отсортирован, все элементы в порядке возрастания.
+ *      Результат: [low..i] ≤ pivot < [i+2..high],
  *      Левые элементы ≤ pivot, правые ≥ pivot => условие Q выполнено.
  */
 
@@ -76,20 +74,19 @@ public class sortArr {
 
     public static void main(String[] args) {
         int[] arr = new int[] {-7, 1, 9, -2, 0, -34, 1, -34, 100, 0};
-        System.out.println("Начальный массив: " + Arrays.toString(arr));
         quickSort(arr);
         System.out.println(Arrays.toString(arr));
 
-//        int[] twoElementsArr = new int[] {1, -2};
-//        quickSort(twoElementsArr);
-//        System.out.println(Arrays.toString(twoElementsArr));
-//
-//        int[] oneElementArr = new int[] {0};
-//        quickSort(oneElementArr);
-//        System.out.println(Arrays.toString(oneElementArr));
-//
-//        int[] emptyArr = new int[] {};
-//        quickSort(emptyArr);
-//        System.out.println(Arrays.toString(emptyArr));
+        int[] twoElementsArr = new int[] {1, -2};
+        quickSort(twoElementsArr);
+        System.out.println(Arrays.toString(twoElementsArr));
+
+        int[] oneElementArr = new int[] {0};
+        quickSort(oneElementArr);
+        System.out.println(Arrays.toString(oneElementArr));
+
+        int[] emptyArr = new int[] {};
+        quickSort(emptyArr);
+        System.out.println(Arrays.toString(emptyArr));
     }
 }
